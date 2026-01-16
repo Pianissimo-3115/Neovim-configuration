@@ -5,9 +5,20 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim",
-        -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     config = function()
+        require("neo-tree").setup({
+            filesystem = {
+                filtered_items = {
+                    visible = true,  -- Show hidden files
+                    hide_dotfiles = false,  -- Explicitly show dotfiles
+                },
+                window = {
+                    width = 30,  -- Customize the width here
+                },
+            },
+        })
+
         vim.keymap.set('n', '<C-d>', ':Neotree filesystem reveal left<CR>', {})
     end
 }
