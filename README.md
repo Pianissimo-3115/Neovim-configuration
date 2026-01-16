@@ -100,7 +100,3 @@ Each plugin or tool is configured in its own file to keep concerns isolated.
 * Lua tooling is configured specifically for editing Neovim configs
 
 ---
-
-## License
-
-MIT
