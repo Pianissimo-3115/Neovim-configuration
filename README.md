@@ -2,7 +2,7 @@
 
 A modular, Lua-based Neovim configuration focused on clarity, performance, and sane defaults.
 
-This repository mirrors the exact layout of `~/.config/nvim` and is intended to be used as-is.
+This repository mirrors the exact layout of `~/.config/nvim` and is intended to be used as-is. It also includes a `clangd` configuration directory for convenient, language-specific C/C++ setup.
 
 ---
 
@@ -21,15 +21,18 @@ This repository mirrors the exact layout of `~/.config/nvim` and is intended to 
     │   ├── debugging.lua          # DAP setup
     │   ├── indent-blankline.lua   # Indentation guides
     │   ├── lsp-autocompletion.lua # nvim-cmp + sources
-    │   ├── lsp-config.lua         # LSP servers & keymaps
+    │   ├── lsp-config.lua         # LSP servers & keymaps (C, C++, Lua)
     │   ├── neotree.lua            # File explorer
-    │   ├── none-ls.lua             # Formatting & linting
+    │   ├── none-ls.lua            # Formatting & linting
     │   ├── telescope.lua          # Fuzzy finder
     │   ├── treesitter.lua         # Syntax highlighting
     │   └── visual_multi.lua       # Multi-cursor editing
     └── snippets/           # LuaSnip snippets
-        ├── cpp.lua
-        └── python.lua
+        ├── cpp.lua                # C++ snippets
+        └── python.lua             # Python snippets
+
+~/.config/clangd
+├── config.yaml             # clangd configuration (C/C++ specific)
 ```
 
 ---
@@ -44,6 +47,8 @@ This setup uses **lazy.nvim**. Plugin versions are pinned via `lazy-lock.json` f
 
 * Lua-only configuration
 * LSP setup with autocompletion
+* Separate configuration for **C** and **C++** via `clangd`
+* Lua LSP configured for Neovim development
 * Treesitter-based highlighting
 * Debug Adapter Protocol (DAP)
 * Telescope-powered navigation
@@ -63,6 +68,10 @@ mv ~/.config/nvim ~/.config/nvim.bak
 # Clone the repository
 git clone <repo-url> ~/.config/nvim
 
+# (Optional but recommended) Copy clangd config
+mkdir -p ~/.config/clangd
+cp -r clangd/* ~/.config/clangd/
+
 # Start Neovim
 nvim
 ```
@@ -76,16 +85,19 @@ Plugins install automatically on first launch.
 * **Editor options**: `vim-options.lua`
 * **Plugins**: `lua/plugins/`
 * **LSP & completion**: `lsp-config.lua`, `lsp-autocompletion.lua`
+* **clangd (C/C++)**: `~/.config/clangd/config.yaml`
 * **Snippets**: `lua/snippets/`
 
-Each plugin is configured in its own file to keep concerns isolated.
+Each plugin or tool is configured in its own file to keep concerns isolated.
 
 ---
 
 ## Notes
 
 * Assumes Neovim ≥ 0.9
-* Designed for C++ and Python development, but easily extensible
+* Optimized primarily for C, C++, and Python development
+* C/C++ behavior is split cleanly using `clangd` configuration
+* Lua tooling is configured specifically for editing Neovim configs
 
 ---
 
